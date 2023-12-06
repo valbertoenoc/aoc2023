@@ -2,13 +2,13 @@ package line_utils
 
 import (
 	"strconv"
-	"strings"
 	"unicode"
 )
 
-type numbersTable map[string]int
-
-type spelledIndices map[int]int
+type (
+	numbersTable   map[string]int
+	spelledIndices map[int]int
+)
 
 var spelledNumbers numbersTable = numbersTable{
 	"one":   1,
@@ -24,11 +24,25 @@ var spelledNumbers numbersTable = numbersTable{
 
 func SumConcatDigits(line string) int {
 	var digits string
-	spelledIdx := FindSpelledNumbers(line)
 
 	for i, char := range line {
-		if val, ok := spelledIdx[i]; ok {
-			digits += strconv.Itoa(val)
+
+		if len(line[i:]) >= 3 {
+			if val, ok := spelledNumbers[line[i:i+3]]; ok {
+				digits += strconv.Itoa(val)
+			}
+		}
+
+		if len(line[i:]) >= 4 {
+			if val, ok := spelledNumbers[line[i:i+4]]; ok {
+				digits += strconv.Itoa(val)
+			}
+		}
+
+		if len(line[i:]) >= 5 {
+			if val, ok := spelledNumbers[line[i:i+5]]; ok {
+				digits += strconv.Itoa(val)
+			}
 		}
 
 		if unicode.IsDigit(char) {
@@ -40,18 +54,4 @@ func SumConcatDigits(line string) int {
 	sumDigits, _ := strconv.Atoi(string(concatRunes))
 
 	return sumDigits
-}
-
-func FindSpelledNumbers(line string) spelledIndices {
-	spelled := spelledIndices{}
-	for k, v := range spelledNumbers {
-		index := strings.Index(line, k)
-		if index == -1 {
-			continue
-		}
-
-		spelled[index] = v
-	}
-
-	return spelled
 }

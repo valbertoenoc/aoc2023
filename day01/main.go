@@ -21,7 +21,7 @@ func main() {
 	sum := 0
 	for scanner.Scan() {
 		line := scanner.Text()
-		sum += line_utils.ConcatDigits(line)
+		sum += line_utils.SumConcatDigits(line)
 	}
 
 	fmt.Println(sum)

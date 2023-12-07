@@ -20,24 +20,15 @@ func main() {
 	scanner := bufio.NewScanner(file)
 	sumId := 0
 	sumPossible := 0
-	count := 0
 	for scanner.Scan() {
 		line := scanner.Text()
 
-		fmt.Println(line)
 		g := game.GameParser(line)
 		sumPossible += game.FindMinPossibleToValid(g.Cubes)
-		fmt.Println(g)
-		fmt.Println("----------------------------------------------------------------------------------------------------")
 
 		if g.Valid {
 			sumId += g.ID
 		}
-
-		count += 1
-		// if count == 100 {
-		// 	break
-		// }
 
 	}
 

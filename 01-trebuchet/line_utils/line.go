@@ -6,8 +6,7 @@ import (
 )
 
 type (
-	numbersTable   map[string]int
-	spelledIndices map[int]int
+	numbersTable map[string]int
 )
 
 var spelledNumbers numbersTable = numbersTable{

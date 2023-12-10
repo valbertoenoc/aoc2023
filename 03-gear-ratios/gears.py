@@ -10,13 +10,15 @@ cols = len(grid[0])
 
 part1 = 0
 nums = defaultdict(list)
+
+# treversing grid rows
 for r in range(len(grid)):
     gears = set()
     n = 0
     has_part = False
-    # treversing grid rows
+    # treversing grid cols
     for c in range(len(grid[r]) + 1):
-        # if is digit
+        # if not in the edge and element is digit
         if c < cols and grid[r][c].isdigit():
             n = n * 10 + int(grid[r][c])
             for rr in [-1, 0, 1]:
